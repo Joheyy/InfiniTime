@@ -15,7 +15,7 @@
 #include "components/settings/Settings.h"
 using namespace Pinetime::Applications::Screens;
 
-LV_IMG_DECLARE(waves);
+LV_IMG_DECLARE(bg_pines);
 
 WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
                                    Controllers::DateTime& dateTimeController,
@@ -37,8 +37,10 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
   settingsController.SetClockFace(3);
 
   lv_obj_t* bg_clock_img = lv_img_create(lv_scr_act(), NULL);
-  lv_img_set_src(bg_clock_img, &waves);
+  lv_img_set_src(bg_clock_img, &bg_pines);
   lv_obj_align(bg_clock_img, NULL, LV_ALIGN_CENTER, 0, 0);
+  lv_obj_set_style_local_image_recolor(bg_clock_img, LV_IMG_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_RED);
+  lv_obj_set_style_local_image_recolor_opa(bg_clock_img, LV_IMG_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_COVER);
 
   batteryIcon = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(batteryIcon, Symbols::batteryFull);
