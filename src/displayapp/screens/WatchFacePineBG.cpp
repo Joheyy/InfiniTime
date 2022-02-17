@@ -3,6 +3,7 @@
 #include <date/date.h>
 #include <lvgl/lvgl.h>
 #include <cstdio>
+#include "displayapp/Colors.h"
 #include "displayapp/screens/BatteryIcon.h"
 #include "displayapp/screens/BleIcon.h"
 #include "displayapp/screens/NotificationIcon.h"
@@ -36,11 +37,15 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
     motionController {motionController} {
   settingsController.SetClockFace(3);
 
-  lv_obj_t* bg_clock_img = lv_img_create(lv_scr_act(), NULL);
+  lv_obj_t* bg_obj = lv_obj_create(lv_scr_act(), NULL);
+  lv_obj_set_height(bg_obj, LV_VER_RES);
+  lv_obj_set_width(bg_obj, LV_HOR_RES);
+  lv_obj_align(bg_obj, NULL, LV_ALIGN_CENTER, 0, 0);
+  lv_obj_set_style_local_bg_color(bg_obj, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, Convert(settingsController.GetPTSColorTime()));
+
+  lv_obj_t* bg_clock_img = lv_img_create(bg_obj, NULL);
   lv_img_set_src(bg_clock_img, &bg_pines);
   lv_obj_align(bg_clock_img, NULL, LV_ALIGN_CENTER, 0, 0);
-  lv_obj_set_style_local_image_recolor(bg_clock_img, LV_IMG_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_RED);
-  lv_obj_set_style_local_image_recolor_opa(bg_clock_img, LV_IMG_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_COVER);
 
   batteryIcon = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(batteryIcon, Symbols::batteryFull);
