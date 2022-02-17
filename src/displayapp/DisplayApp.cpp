@@ -241,7 +241,7 @@ void DisplayApp::Refresh() {
                 LoadApp(Apps::Notifications, DisplayApp::FullRefreshDirections::Down);
                 break;
               case TouchEvents::SwipeRight:
-                LoadApp(Apps::QuickSettings, DisplayApp::FullRefreshDirections::RightAnim);
+                LoadApp(Apps::QuickSettings, DisplayApp::FullRefreshDirections::None);
                 break;
               case TouchEvents::DoubleTap:
                 PushMessageToSystemTask(System::Messages::GoToSleep);
@@ -274,7 +274,7 @@ void DisplayApp::Refresh() {
           if (currentApp == Apps::Notifications) {
             LoadApp(Apps::Clock, DisplayApp::FullRefreshDirections::Up);
           } else if (currentApp == Apps::QuickSettings) {
-            LoadApp(Apps::Clock, DisplayApp::FullRefreshDirections::LeftAnim);
+            LoadApp(Apps::Clock, DisplayApp::FullRefreshDirections::None);
           } else {
             LoadApp(Apps::Clock, DisplayApp::FullRefreshDirections::Down);
           }
@@ -392,7 +392,7 @@ void DisplayApp::LoadApp(Apps app, DisplayApp::FullRefreshDirections direction) 
     case Apps::QuickSettings:
       currentScreen = std::make_unique<Screens::QuickSettings>(
         this, batteryController, dateTimeController, brightnessController, motorController, settingsController);
-      ReturnApp(Apps::Clock, FullRefreshDirections::LeftAnim, TouchEvents::SwipeLeft);
+      ReturnApp(Apps::Clock, FullRefreshDirections::None, TouchEvents::SwipeLeft);
       break;
     case Apps::Settings:
       currentScreen = std::make_unique<Screens::Settings>(this, settingsController);
