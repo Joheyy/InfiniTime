@@ -70,10 +70,14 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
   lv_obj_align(label_date, lv_scr_act(), LV_ALIGN_CENTER, 0, 60);
   lv_obj_set_style_local_text_color(label_date, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0x999999));
 
-  label_time = lv_label_create(lv_scr_act(), nullptr);
-  lv_obj_set_style_local_text_font(label_time, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &jetbrains_mono_extrabold_compressed);
-
-  lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_RIGHT_MID, 0, 0);
+  label_time_hrs = lv_label_create(lv_scr_act(), nullptr);
+  label_time_min = lv_label_create(lv_scr_act(), nullptr);
+  lv_obj_set_style_local_text_font(label_time_hrs, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &carlito_bold_120);
+  lv_obj_set_style_local_text_font(label_time_min, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &carlito_bold_120);
+  lv_label_set_text_fmt(label_time_hrs, "%02d", 0);
+  lv_label_set_text_fmt(label_time_min, "%02d", 0);
+  lv_obj_align(label_time_hrs, lv_scr_act(), LV_ALIGN_CENTER, 0, -50);
+  lv_obj_align(label_time_min, lv_scr_act(), LV_ALIGN_CENTER, 0, 50);
 
   label_time_ampm = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(label_time_ampm, "");
@@ -177,12 +181,10 @@ void WatchFacePineBG::Refresh() {
           ampmChar[0] = 'P';
         }
         lv_label_set_text(label_time_ampm, ampmChar);
-        lv_label_set_text_fmt(label_time, "%2d:%02d", hour, minute);
-        lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_IN_RIGHT_MID, 0, 0);
-      } else {
-        lv_label_set_text_fmt(label_time, "%02d:%02d", hour, minute);
-        lv_obj_align(label_time, lv_scr_act(), LV_ALIGN_CENTER, 0, 0);
       }
+      
+      lv_label_set_text_fmt(label_time_hrs, "%02d", hour);
+      lv_label_set_text_fmt(label_time_min, "%02d", minute);
     }
 
     if ((year != currentYear) || (month != currentMonth) || (dayOfWeek != currentDayOfWeek) || (day != currentDay)) {
