@@ -295,6 +295,7 @@ set(LVGL_SRC
         libs/lvgl/src/lv_font/lv_font_montserrat_18.c
         libs/lvgl/src/lv_font/lv_font_montserrat_22.c
         libs/lvgl/src/lv_font/lv_font_montserrat_28.c
+        libs/lvgl/src/lv_font/lv_font_montserrat_48.c
         #
         libs/lvgl/src/lv_hal/lv_hal_disp.c
         libs/lvgl/src/lv_hal/lv_hal_indev.c
@@ -515,6 +516,7 @@ list(APPEND SOURCE_FILES
         displayapp/fonts/jetbrains_mono_42.c
         displayapp/fonts/lv_font_sys_48.c
         displayapp/fonts/open_sans_light.c
+        displayapp/fonts/carlito_bold_120.c
         displayapp/lv_pinetime_theme.c
 
         systemtask/SystemTask.cpp
