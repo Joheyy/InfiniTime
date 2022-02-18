@@ -37,15 +37,15 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
     motionController {motionController} {
   settingsController.SetClockFace(3);
 
-  bg_obj = lv_obj_create(lv_scr_act(), NULL);
+  bg_obj = lv_obj_create(lv_scr_act(), nullptr);
   lv_obj_set_height(bg_obj, LV_VER_RES);
   lv_obj_set_width(bg_obj, LV_HOR_RES);
-  lv_obj_align(bg_obj, NULL, LV_ALIGN_CENTER, 0, 0);
+  lv_obj_align(bg_obj, nullptr, LV_ALIGN_CENTER, 0, 0);
   lv_obj_set_style_local_bg_color(bg_obj, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, Convert(settingsController.GetPTSColorTime()));
 
-  bg_clock_img = lv_img_create(bg_obj, NULL);
+  bg_clock_img = lv_img_create(bg_obj, nullptr);
   lv_img_set_src(bg_clock_img, &bg_pines);
-  lv_obj_align(bg_clock_img, NULL, LV_ALIGN_CENTER, 0, 0);
+  lv_obj_align(bg_clock_img, nullptr, LV_ALIGN_CENTER, 0, 0);
 
   batteryIcon = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(batteryIcon, Symbols::batteryFull);
