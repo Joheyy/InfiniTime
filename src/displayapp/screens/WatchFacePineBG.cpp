@@ -47,6 +47,15 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
   lv_img_set_src(bg_clock_img, &bg_pines);
   lv_obj_align(bg_clock_img, nullptr, LV_ALIGN_CENTER, 0, 0);
 
+  label_time_hrs = lv_label_create(lv_scr_act(), nullptr);
+  label_time_min = lv_label_create(lv_scr_act(), nullptr);
+  lv_obj_set_style_local_text_font(label_time_hrs, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &carlito_bold_120);
+  lv_obj_set_style_local_text_font(label_time_min, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &carlito_bold_120);
+  lv_label_set_text_fmt(label_time_hrs, "%02d", 0);
+  lv_label_set_text_fmt(label_time_min, "%02d", 0);
+  lv_obj_align(label_time_hrs, lv_scr_act(), LV_ALIGN_CENTER, 0, -50);
+  lv_obj_align(label_time_min, lv_scr_act(), LV_ALIGN_CENTER, 0, 50);
+
   batteryIcon = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(batteryIcon, Symbols::batteryFull);
   lv_obj_align(batteryIcon, lv_scr_act(), LV_ALIGN_IN_TOP_RIGHT, 0, 0);
@@ -65,15 +74,6 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
 
   label_date = lv_label_create(lv_scr_act(), nullptr);
   lv_obj_align(label_date, lv_scr_act(), LV_ALIGN_CENTER, 0, 60);
-
-  label_time_hrs = lv_label_create(lv_scr_act(), nullptr);
-  label_time_min = lv_label_create(lv_scr_act(), nullptr);
-  lv_obj_set_style_local_text_font(label_time_hrs, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &carlito_bold_120);
-  lv_obj_set_style_local_text_font(label_time_min, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &carlito_bold_120);
-  lv_label_set_text_fmt(label_time_hrs, "%02d", 0);
-  lv_label_set_text_fmt(label_time_min, "%02d", 0);
-  lv_obj_align(label_time_hrs, lv_scr_act(), LV_ALIGN_CENTER, 0, -50);
-  lv_obj_align(label_time_min, lv_scr_act(), LV_ALIGN_CENTER, 0, 50);
 
   label_time_ampm = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(label_time_ampm, "");
