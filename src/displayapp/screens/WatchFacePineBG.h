@@ -55,7 +55,8 @@ namespace Pinetime {
 
         lv_obj_t* bg_obj;
         lv_obj_t* bg_clock_img;
-        lv_obj_t* label_time;
+        lv_obj_t* label_time_hrs;
+        lv_obj_t* label_time_min;
         lv_obj_t* label_time_ampm;
         lv_obj_t* label_date;
         lv_obj_t* backgroundLabel;
