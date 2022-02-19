@@ -64,7 +64,7 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
 
   notificationIcon = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(notificationIcon, NotificationIcon::GetIcon(false));
-  lv_obj_align(notificationIcon, nullptr, LV_ALIGN_IN_TOP_LEFT, 0, 0);
+  lv_obj_align(notificationIcon, nullptr, LV_ALIGN_IN_TOP_MID, 0, 5);
 
   label_date_weekday = lv_label_create(lv_scr_act(), nullptr);
   label_date_day = lv_label_create(lv_scr_act(), nullptr);
