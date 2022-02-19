@@ -100,7 +100,5 @@ std::unique_ptr<Screen> Clock::WatchFacePineBGScreen() {
                                                      batteryController,
                                                      bleController,
                                                      notificatioManager,
-                                                     settingsController,
-                                                     heartRateController,
-                                                     motionController);
+                                                     settingsController);
 }
