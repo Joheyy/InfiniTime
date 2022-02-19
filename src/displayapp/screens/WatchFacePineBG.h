@@ -13,8 +13,6 @@ namespace Pinetime {
     class Battery;
     class Ble;
     class NotificationManager;
-    class HeartRateController;
-    class MotionController;
   }
 
   namespace Applications {
@@ -27,9 +25,7 @@ namespace Pinetime {
                          Controllers::Battery& batteryController,
                          Controllers::Ble& bleController,
                          Controllers::NotificationManager& notificatioManager,
-                         Controllers::Settings& settingsController,
-                         Controllers::HeartRateController& heartRateController,
-                         Controllers::MotionController& motionController);
+                         Controllers::Settings& settingsController);
         ~WatchFacePineBG() override;
 
         void Refresh() override;
@@ -47,10 +43,6 @@ namespace Pinetime {
         DirtyValue<bool> powerPresent {};
         DirtyValue<bool> bleState {};
         DirtyValue<std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds>> currentDateTime {};
-        DirtyValue<bool> motionSensorOk {};
-        DirtyValue<uint32_t> stepCount {};
-        DirtyValue<uint8_t> heartbeat {};
-        DirtyValue<bool> heartbeatRunning {};
         DirtyValue<bool> notificationState {};
 
         lv_obj_t* bg_obj;
@@ -63,10 +55,6 @@ namespace Pinetime {
         lv_obj_t* batteryIcon;
         lv_obj_t* bleIcon;
         lv_obj_t* batteryPlug;
-        lv_obj_t* heartbeatIcon;
-        lv_obj_t* heartbeatValue;
-        lv_obj_t* stepIcon;
-        lv_obj_t* stepValue;
         lv_obj_t* notificationIcon;
 
         Controllers::DateTime& dateTimeController;
@@ -74,8 +62,6 @@ namespace Pinetime {
         Controllers::Ble& bleController;
         Controllers::NotificationManager& notificatioManager;
         Controllers::Settings& settingsController;
-        Controllers::HeartRateController& heartRateController;
-        Controllers::MotionController& motionController;
 
         lv_task_t* taskRefresh;
       };
