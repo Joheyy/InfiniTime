@@ -50,7 +50,9 @@ namespace Pinetime {
         lv_obj_t* label_time_hrs;
         lv_obj_t* label_time_min;
         lv_obj_t* label_time_ampm;
-        lv_obj_t* label_date;
+        lv_obj_t* label_date_weekday;
+        lv_obj_t* label_date_day;
+        lv_obj_t* label_date_month;
         lv_obj_t* batteryIcon;
         lv_obj_t* bleIcon;
         lv_obj_t* batteryPlug;
