@@ -144,9 +144,11 @@ void QuickSettings::OnButtonEvent(lv_obj_t* object, lv_event_t event) {
     if (lv_obj_get_state(btn3, LV_BTN_PART_MAIN) & LV_STATE_CHECKED) {
       settingsController.SetNotificationStatus(Controllers::Settings::Notification::ON);
       motorController.RunForDuration(35);
+      settingsController.setWakeUpMode(Controllers::Settings::WakeUpMode::RaiseWrist, true);
       lv_label_set_text_static(btn3_lvl, Symbols::notificationsOn);
     } else {
       settingsController.SetNotificationStatus(Controllers::Settings::Notification::OFF);
+      settingsController.setWakeUpMode(Controllers::Settings::WakeUpMode::RaiseWrist, false);
       lv_label_set_text_static(btn3_lvl, Symbols::notificationsOff);
     }
 
