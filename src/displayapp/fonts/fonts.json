@@ -74,5 +74,16 @@
       "bpp": 2,
       "size": 80,
       "compress": true
+   },
+   "carlito_bold_120": {
+      "sources": [
+         {
+            "file": "Carlito-Bold.ttf",
+            "symbols": "0123456789"
+         }
+      ],
+      "bpp": 1,
+      "size": 120,
+      "compress": true
    }
 }
