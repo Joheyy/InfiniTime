@@ -258,7 +258,14 @@ void DisplayApp::Refresh() {
         LoadApp(Apps::SysInfo, DisplayApp::FullRefreshDirections::Up);
         break;
       case Messages::ButtonDoubleClicked:
-        if (currentApp != Apps::Notifications && currentApp != Apps::NotificationsPreview) {
+        if (currentApp == Apps::Clock) {
+          auto musicService = systemTask->nimble().music();
+          if (musicService.isPlaying()) {
+            musicService.event(Controllers::MusicService::EVENT_MUSIC_PAUSE);
+          } else {
+            musicService.event(Controllers::MusicService::EVENT_MUSIC_PLAY);
+          }
+        } else if (currentApp != Apps::Notifications && currentApp != Apps::NotificationsPreview) {
           LoadApp(Apps::Notifications, DisplayApp::FullRefreshDirections::Down);
         }
         break;
