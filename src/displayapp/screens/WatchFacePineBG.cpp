@@ -50,13 +50,13 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
   lv_obj_align(label_time_hrs, lv_scr_act(), LV_ALIGN_CENTER, 0, -50);
   lv_obj_align(label_time_min, lv_scr_act(), LV_ALIGN_CENTER, 0, 50);
 
-  batteryIcon = lv_label_create(lv_scr_act(), nullptr);
-  lv_label_set_text_static(batteryIcon, Symbols::batteryFull);
-  lv_obj_align(batteryIcon, nullptr, LV_ALIGN_CENTER, -85, -20);
+  batteryIcon.Create(lv_scr_act());
+  batteryIcon.SetColor(LV_COLOR_WHITE);
+  lv_obj_align(batteryIcon.GetObject(), nullptr, LV_ALIGN_CENTER, -85, -20);
 
   batteryPlug = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(batteryPlug, Symbols::plug);
-  lv_obj_align(batteryPlug, batteryIcon, LV_ALIGN_OUT_LEFT_MID, -5, 0);
+  lv_obj_align(batteryPlug, batteryIcon.GetObject(), LV_ALIGN_OUT_LEFT_MID, -5, 0);
 
   bleIcon = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(bleIcon, Symbols::bluetooth);
@@ -95,19 +95,14 @@ void WatchFacePineBG::Refresh() {
   batteryPercentRemaining = batteryController.PercentRemaining();
   if (batteryPercentRemaining.IsUpdated()) {
     auto batteryPercent = batteryPercentRemaining.Get();
-    if (batteryPercent == 100) {
-      lv_obj_set_style_local_text_color(batteryIcon, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_GREEN);
-    } else {
-      lv_obj_set_style_local_text_color(batteryIcon, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
-    }
-    lv_label_set_text_static(batteryIcon, BatteryIcon::GetBatteryIcon(batteryPercent));
+    batteryIcon.SetBatteryPercentage(batteryPercent);
   }
 
   bleState = bleController.IsConnected();
   if (bleState.IsUpdated()) {
     lv_label_set_text_static(bleIcon, BleIcon::GetIcon(bleState.Get()));
   }
-  lv_obj_realign(batteryIcon);
+  lv_obj_realign(batteryIcon.GetObject());
   lv_obj_realign(batteryPlug);
   lv_obj_realign(bleIcon);
 

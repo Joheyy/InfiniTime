@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <memory>
 #include "displayapp/screens/Screen.h"
+#include "displayapp/screens/BatteryIcon.h"
 #include "components/datetime/DateTimeController.h"
 
 namespace Pinetime {
@@ -53,10 +54,11 @@ namespace Pinetime {
         lv_obj_t* label_date_weekday;
         lv_obj_t* label_date_day;
         lv_obj_t* label_date_month;
-        lv_obj_t* batteryIcon;
         lv_obj_t* bleIcon;
         lv_obj_t* batteryPlug;
         lv_obj_t* notificationIcon;
+
+        BatteryIcon batteryIcon;
 
         Controllers::DateTime& dateTimeController;
         Controllers::Battery& batteryController;
