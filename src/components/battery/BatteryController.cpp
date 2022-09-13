@@ -80,18 +80,7 @@ void Battery::SaadcEventHandler(nrfx_saadc_evt_t const* p_event) {
     } else if (voltage < battery_min) {
       newPercent = 0;
     } else {
-      // voltage to percent conversion
-      float_t voltagePercent = ((float_t) (voltage - battery_min)) / ((float_t) (battery_max - battery_min));
-      if (voltagePercent > 0.6245444) {
-        newPercent = 100*( 1.0815963*voltagePercent-0.0815963 );
-        if (isCharging && newPercent == 100) {
-          newPercent = 99;
-        }
-      } else if (voltagePercent > 0.4143378) {
-        newPercent = 100*( 2.5275267*voltagePercent-0.9846441 );
-      } else {
-        newPercent = 100*( 0.1510985*voltagePercent );
-      }
+      newPercent = std::min((voltage - battery_min) * 100 / (battery_max - battery_min), isCharging ? 99 : 100);
     }
 
     if ((isPowerPresent && newPercent > percentRemaining) || (!isPowerPresent && newPercent < percentRemaining) || firstMeasurement) {

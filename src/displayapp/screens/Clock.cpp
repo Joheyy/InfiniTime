@@ -11,8 +11,7 @@
 #include "displayapp/screens/WatchFaceDigital.h"
 #include "displayapp/screens/WatchFaceTerminal.h"
 #include "displayapp/screens/WatchFaceAnalog.h"
-#include "displayapp/screens/PineTimeStyle.h"
-#include "displayapp/screens/WatchFacePineBG.h"
+#include "displayapp/screens/WatchFacePineTimeStyle.h"
 
 using namespace Pinetime::Applications::Screens;
 
@@ -41,10 +40,10 @@ Clock::Clock(DisplayApp* app,
           return WatchFaceAnalogScreen();
           break;
         case 2:
-          return PineTimeStyleScreen();
+          return WatchFacePineTimeStyleScreen();
           break;
         case 3:
-          return WatchFacePineBGScreen();
+          return WatchFaceTerminalScreen();
           break;
       }
       return WatchFaceDigitalScreen();
@@ -76,20 +75,31 @@ std::unique_ptr<Screen> Clock::WatchFaceDigitalScreen() {
 }
 
 std::unique_ptr<Screen> Clock::WatchFaceAnalogScreen() {
-  return std::make_unique<Screens::WatchFaceAnalog>(
-    app, dateTimeController, batteryController, bleController, notificatioManager, settingsController);
+  return std::make_unique<Screens::WatchFaceAnalog>(app,
+                                                    dateTimeController,
+                                                    batteryController,
+                                                    bleController,
+                                                    notificatioManager,
+                                                    settingsController);
 }
 
-std::unique_ptr<Screen> Clock::PineTimeStyleScreen() {
-  return std::make_unique<Screens::PineTimeStyle>(
-    app, dateTimeController, batteryController, bleController, notificatioManager, settingsController, motionController);
+std::unique_ptr<Screen> Clock::WatchFacePineTimeStyleScreen() {
+  return std::make_unique<Screens::WatchFacePineTimeStyle>(app,
+                                                           dateTimeController,
+                                                           batteryController,
+                                                           bleController,
+                                                           notificatioManager,
+                                                           settingsController,
+                                                           motionController);
 }
 
-std::unique_ptr<Screen> Clock::WatchFacePineBGScreen() {
-  return std::make_unique<Screens::WatchFacePineBG>(app,
-                                                     dateTimeController,
-                                                     batteryController,
-                                                     bleController,
-                                                     notificatioManager,
-                                                     settingsController);
+std::unique_ptr<Screen> Clock::WatchFaceTerminalScreen() {
+  return std::make_unique<Screens::WatchFaceTerminal>(app,
+                                                      dateTimeController,
+                                                      batteryController,
+                                                      bleController,
+                                                      notificatioManager,
+                                                      settingsController,
+                                                      heartRateController,
+                                                      motionController);
 }
