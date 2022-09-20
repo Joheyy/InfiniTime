@@ -21,14 +21,16 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
                                    Controllers::Battery& batteryController,
                                    Controllers::Ble& bleController,
                                    Controllers::NotificationManager& notificatioManager,
-                                   Controllers::Settings& settingsController)
+                                   Controllers::Settings& settingsController,
+                                   Controllers::TimerController& timerController)
   : Screen(app),
     currentDateTime {{}},
     dateTimeController {dateTimeController},
     batteryController {batteryController},
     bleController {bleController},
     notificatioManager {notificatioManager},
-    settingsController {settingsController} {
+    settingsController {settingsController},
+    timerController {timerController} {
   settingsController.SetClockFace(3);
 
   bg_obj = lv_obj_create(lv_scr_act(), nullptr);
@@ -65,6 +67,11 @@ WatchFacePineBG::WatchFacePineBG(DisplayApp* app,
   notificationIcon = lv_label_create(lv_scr_act(), nullptr);
   lv_label_set_text_static(notificationIcon, NotificationIcon::GetIcon(false));
   lv_obj_align(notificationIcon, nullptr, LV_ALIGN_IN_TOP_MID, 0, 5);
+
+  label_timer = lv_label_create(lv_scr_act(), nullptr);
+  lv_label_set_text(label_timer, "00:00");
+  lv_obj_align(label_timer, nullptr, LV_ALIGN_IN_BOTTOM_MID, 0, -5);
+  lv_label_set_text(label_timer, "");
 
   label_date_weekday = lv_label_create(lv_scr_act(), nullptr);
   label_date_day = lv_label_create(lv_scr_act(), nullptr);
@@ -109,6 +116,13 @@ void WatchFacePineBG::Refresh() {
   notificationState = notificatioManager.AreNewNotificationsAvailable();
   if (notificationState.IsUpdated()) {
     lv_label_set_text_static(notificationIcon, NotificationIcon::GetIcon(notificationState.Get()));
+  }
+
+  if (timerController.IsRunning()) {
+    uint32_t seconds = timerController.GetTimeRemaining() / 1000;
+    uint32_t minutesDisplay = seconds / 60;
+    uint32_t secondsDisplay = seconds % 60;
+    lv_label_set_text_fmt(label_timer, "%02d:%02d", minutesDisplay, secondsDisplay);
   }
 
   currentDateTime = dateTimeController.CurrentDateTime();

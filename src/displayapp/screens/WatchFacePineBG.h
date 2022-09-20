@@ -7,6 +7,7 @@
 #include "displayapp/screens/Screen.h"
 #include "displayapp/screens/BatteryIcon.h"
 #include "components/datetime/DateTimeController.h"
+#include "components/timer/TimerController.h"
 
 namespace Pinetime {
   namespace Controllers {
@@ -26,7 +27,8 @@ namespace Pinetime {
                          Controllers::Battery& batteryController,
                          Controllers::Ble& bleController,
                          Controllers::NotificationManager& notificatioManager,
-                         Controllers::Settings& settingsController);
+                         Controllers::Settings& settingsController,
+                         Controllers::TimerController& timerController);
         ~WatchFacePineBG() override;
 
         void Refresh() override;
@@ -54,6 +56,7 @@ namespace Pinetime {
         lv_obj_t* label_date_weekday;
         lv_obj_t* label_date_day;
         lv_obj_t* label_date_month;
+        lv_obj_t* label_timer;
         lv_obj_t* bleIcon;
         lv_obj_t* batteryPlug;
         lv_obj_t* notificationIcon;
@@ -65,6 +68,7 @@ namespace Pinetime {
         Controllers::Ble& bleController;
         Controllers::NotificationManager& notificatioManager;
         Controllers::Settings& settingsController;
+        Controllers::TimerController& timerController;
 
         lv_task_t* taskRefresh;
       };
